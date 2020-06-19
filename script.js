@@ -44,11 +44,11 @@ function passwordOptions() {
   );
 
   var hasLowerCasedCharacters = confirm(
-    'Click OK to confirm including lowercase characters.'
+    "Click OK to confirm including lowercase characters."
   );
 
   var hasUpperCasedCharacters = confirm(
-    'Click OK to confirm including uppercase characters.'
+    "Click OK to confirm including uppercase characters."
   );
 
   var passwordOptions = {
@@ -62,6 +62,50 @@ function passwordOptions() {
   return passwordOptions;
 }
 
+function generateRandom(array) {
+  var arrayIndex = Math.floor(Math.random() * array.length);
+  var randomCharacter = array[arrayIndex];
+
+  return randomCharacter;
+}
+function generatePassword() {
+  var choices = passwordOptions();
+  var result = [];
+  var possibleCharacters = [];
+  var confirmedCharacters = [];
+
+      
+  if (choices.hasSpecialCharacters) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+    
+    confirmedCharacters.push(generateRandom(specialCharacters));
+  }
+  if (choices.hasNumericCharacters) {
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+    
+    confirmedCharacters.push(generateRandom(numericCharacters));
+  }
+  if (choices.hasLowerCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+    
+    confirmedCharacters.push(generateRandom(lowerCasedCharacters));
+  }
+  if (choices.hasUpperCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+    
+    confirmedCharacters.push(generateRandom(upperCasedCharacters));
+  }
+
+  for (var i = 0; i < choices.length; i++) {
+    var possibleCharacter = generateRandom(possibleCharacters);
+
+    result.push(possibleCharacter);
+  }
+  for (var i = 0; i < confirmedCharacters.length; i++) {
+    result[i] = confirmedCharacters[i];
+  }
+  return result.join("");
+}
 
 
 
